@@ -21,25 +21,15 @@ console.timeEnd('Solution #1');
 // SOLUTION 2 --START //
 console.time('Solution #2');
 
-const testedNumbers = [];
+const testedNumbers = {};
 let res2 = null;
 
-// numbers.every((number) => {
-//   const calcRes = target - number;
-//   if (testedNumbers.includes(calcRes)) {
-//     res = [number, calcRes];
-//     return false;
-//   } else {
-//     testedNumbers.push(number);
-//     return true;
-//   }
-// });
 numbers.forEach((number) => {
   const calcRes = target - number;
-  if (testedNumbers.includes(calcRes)) {
+  if (testedNumbers[calcRes]) {
     res2 = [number, calcRes];
   } else {
-    testedNumbers.push(number);
+    testedNumbers[number] = true;
   }
 });
 console.log(res2);
@@ -53,7 +43,7 @@ const sortedNumbers = [...numbers].sort((a, b) => a - b);
 let lm = 0;
 let rm = sortedNumbers.length - 1;
 let res3 = null;
-while (!res3) {
+while (lm < rm) {
   const calcRes = sortedNumbers[lm] + sortedNumbers[rm];
 
   if (calcRes < target) {
